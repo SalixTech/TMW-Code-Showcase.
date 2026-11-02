@@ -1,0 +1,14 @@
+# Keep this code-reading repository free of runtime state and private inputs.
+.env
+.env.*
+*.pem
+*.key
+*service-account*.json
+*serviceAccount*.json
+node_modules/
+.next/
+dist/
+coverage/
+*.log
+*.zip
+.DS_Store
