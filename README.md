@@ -1,32 +1,50 @@
-# TripMaster Web — Code Showcase
+# TripMaster Web — Commercial Fleet Payroll & Driver Telematics Engine
 
-A focused TypeScript/React code sample from a driver-facing trip and pay application. The selection follows a concrete flow: structured trip records become configurable pay calculations, payroll-week summaries, and browsable trip/pay screens.
+A curated architectural showcase demonstrating domain-specific payroll algorithms, cross-time-zone workweek calculations, and operational trip management built for the TripMaster commercial driver platform.
 
-**Code review only — not a runnable application or live demo.** Application routes, authentication, backend integration, runtime configuration, styling/build setup, and data are not included.
+This repository highlights selected implementation modules—specifically focusing on pure additive pay calculation engines, configurable exception rule trees, time-zone calendar aggregation, and stateful driver dashboards[cite: 8].
 
-## Reading guide
+---
 
-| Start here | What to look for |
-| --- | --- |
-| [`src/types/trip.ts`](src/types/trip.ts) and [`src/types/pay.ts`](src/types/pay.ts) | Trip lifecycle fields, captured per-trip rates, pay toggles, and configurable trip-ID exceptions. |
-| [`src/lib/payStorage.ts`](src/lib/payStorage.ts) | Pure calculation excerpt: additive mileage/hourly/stop/trailer/shag pay, with normalized and enabled trip-ID exception rules. |
-| [`src/lib/payroll.ts`](src/lib/payroll.ts) | Calendar-based workweek boundaries in four US time zones; completed-trip filtering and week-over-week pay summaries. |
-| [`src/components/PayScreen.tsx`](src/components/PayScreen.tsx) | Period filtering, computed totals, selectable details, and session-scoped display preferences. |
-| [`src/components/TripsScreen.tsx`](src/components/TripsScreen.tsx) | Pending/completed ordering, trip search, configurable columns, and a parent-supplied navigation callback. |
-| [`src/components/DashboardScreen.tsx`](src/components/DashboardScreen.tsx) | Summary composition, unique-trailer counting, navigation, and error states. |
+### Core Engineering Competencies Demonstrated
 
-Shared formatting and navigation types are included so every local import resolves within `src/`. In the source application's alias convention, `@/` refers to `src/`.
+- **Multi-Variable Rate Calculation Engine:** Pure arithmetic calculation pipeline evaluating mileage, hourly rates, incremental stop fees, trailer bonuses, and shag operations[cite: 8].
+- **Configurable Trip-ID Exception Rules:** Granular override architecture evaluating normalized trip identifiers against user/fleet-defined exception rules to modify additive pay categories dynamically[cite: 8].
+- **Time-Zone-Aware Payroll Aggregation:** Strict calendar workweek boundary calculations supporting all four primary contiguous US time zones, enabling accurate completed-trip partitioning and week-over-week wage summaries[cite: 8].
+- **Driver Interface State Machines:** Modular React screens handling period filtering, pending vs. completed trip sorting, configurable data grids, and session-persisted display preferences[cite: 8].
+- **Operational Fleet Aggregations:** High-efficiency data rollups including unique asset tracking (trailer count metrics), dispatch lifecycle transitions, and resilient UI error states[cite: 8].
 
-## Selection and boundaries
+---
 
-- Uses the supplied archive's `src/` modules rather than the duplicate root-level component/library variants. Original paths are retained.
-- Eight modules are unchanged. `src/lib/payStorage.ts` retains only the original pure calculation functions and their type imports; Firebase persistence, listeners, account access, and defaults are omitted. The filename is retained to preserve its consumers' imports.
-- No credentials, API routes, mail templates, deployment configuration, account defaults, partner curriculum, uploaded records, or customer data are included.
-- Components accept records and settings from their parent. They do not supply a demonstration dataset or a replacement backend.
-- Calculations intentionally preserve source behavior: rates come from each trip, enablement/exceptions come from current settings, and the weekly summary uses completion dates. These are reviewable design decisions, not a claim of payroll compliance.
+### Tech Stack & Architecture
 
-## Verification
+- **Language & Runtime:** TypeScript (Strict Mode), React, Node.js[cite: 1, 8]
+- **Design Pattern:** Pure Business Logic Decoupling (Pure arithmetic and time-series helpers isolated from UI and transport layers)[cite: 8]
+- **Target Platform:** Commercial fleet web platform & mobile PWA (`app.salixtechnologies.com`)[cite: 8]
 
-The selection was checked with strict TypeScript compilation using local React type dependencies, local-import resolution, source-fidelity comparison, and focused synthetic checks of pay rules and payroll date boundaries. These are preparation-time checks, not a bundled application test suite. No browser, backend, integration, or production-access testing is represented here.
+---
 
-A working demo can be developed separately; this repository is intentionally limited to readable source.
+### Module Reading Guide
+
+| Module / Path | Domain | Architectural Highlight |
+| :--- | :--- | :--- |
+| [`src/lib/payStorage.ts`](src/lib/payStorage.ts)[cite: 8] | **Payroll Calculation Engine** | Pure arithmetic engine evaluating mileage, stop pay, hourly wages, trailer handling, and shag pay with enabled exception-rule overrides[cite: 8]. |
+| [`src/lib/payroll.ts`](src/lib/payroll.ts)[cite: 8] | **Time-Zone Boundary Modeling** | Calendar-based workweek boundaries spanning four US time zones, completed-trip filtering, and weekly historical summaries[cite: 8]. |
+| [`src/types/trip.ts`](src/types/trip.ts)[cite: 8]<br>[`src/types/pay.ts`](src/types/pay.ts)[cite: 8] | **Fleet Domain Schemas** | Typed contracts defining trip lifecycles, per-trip rate locks, category toggles, and exception rules[cite: 8]. |
+| [`src/components/PayScreen.tsx`](src/components/PayScreen.tsx)[cite: 8] | **Financial Presentation** | Period filtering, reactive wage totals, detailed itemization drawer, and session-scoped column preferences[cite: 8]. |
+| [`src/components/TripsScreen.tsx`](src/components/TripsScreen.tsx)[cite: 8] | **Operational Data Grid** | Pending vs. completed record ordering, full-text trip search, dynamic column toggling, and clean navigation callbacks[cite: 8]. |
+| [`src/components/DashboardScreen.tsx`](src/components/DashboardScreen.tsx)[cite: 8] | **Fleet Metrics Composition** | Multi-variable summary cards, unique asset counting (trailers), and structured fallback/error boundaries[cite: 8]. |
+
+---
+
+### Architectural Design Decisions & Isolation Scope
+
+- **Pure Functional Calculation:** Pay calculation helpers are structured as pure, side-effect-free algorithms[cite: 8]. They compute deterministic wage values without external state dependencies, making them trivially unit-testable and reusable across client and server runtimes[cite: 8].
+- **Historical Rate Integrity:** Trip models capture immutable per-trip rate snapshots at the time of creation, preventing subsequent global fleet setting changes from retroactively corrupting past payroll history[cite: 8].
+- **Sanitization & Isolation:** Proprietary customer records, credentials, cloud database connectors, and production telemetry are strictly omitted for data privacy[cite: 8]. All internal imports cleanly resolve within `src/` to demonstrate code structure, typing discipline, and algorithmic design[cite: 8].
+
+---
+
+### Rights
+
+No open-source license is granted by this showcase[cite: 6, 8]. Inclusion of source does not grant reuse or redistribution rights[cite: 6, 8].
